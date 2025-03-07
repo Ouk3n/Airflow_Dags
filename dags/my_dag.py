@@ -1,10 +1,10 @@
 from airflow import DAG
 from random import randint
-from datetime import datetime
+from datetime import datetime,timedelta
 from airflow.operators.python import PythonOperator,BranchPythonOperator
 from airflow.operators.bash import BashOperator
 
-
+default_args={'retries':1,'retry_delay':timedelta(minutes=5)}
 
 
 def _training_model():
@@ -19,7 +19,7 @@ def _choose_model(ti):
 
 
 with DAG ('my_dag',start_date=datetime(2025,1,1),schedule_interval='@daily',
-          catchup=False
+          description='Training ML models',catchup=False,default_args=default_args
 
 ) as dag:
     
