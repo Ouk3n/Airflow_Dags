@@ -17,8 +17,7 @@ def fetch_data():
 
     # Convert the time series data into a DataFrame
     df = pd.DataFrame.from_dict(time_series, orient='index')
-    df.index = pd.to_datetime(df.index)
-    df.sort_index(inplace=True)
+    df.sort_values(['date'])
 
     # Save the DataFrame to a CSV file
     df.to_csv('AAPL_stock_data.csv')
@@ -51,8 +50,8 @@ def database_upload():
 
 
 
-with DAG ('fetch_dag',start_date=datetime (2025,1,1),
-          schedule_interval='@daily'
+with DAG ('fetch_dag',start_date=datetime (2025,3,6),
+          schedule_interval='@once',catchup=False,retries=1,description='A basic DAG to fetch stock data of apple using alphavantage and uploading it to PostgresSQL'
 ) as dag:
     
 
