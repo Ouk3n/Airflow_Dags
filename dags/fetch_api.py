@@ -51,7 +51,7 @@ def database_upload():
 
 
 with DAG ('fetch_dag',start_date=datetime (2025,3,6),
-          schedule_interval='@once',catchup=False,retries=1,description='A basic DAG to fetch stock data of apple using alphavantage and uploading it to PostgresSQL'
+          schedule_interval='@once',catchup=False,description='A basic DAG to fetch stock data of apple using alphavantage and uploading it to PostgresSQL'
 ) as dag:
     
 
