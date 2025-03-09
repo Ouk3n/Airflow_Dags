@@ -10,7 +10,11 @@ def say_hello():
 default_args = {
     'owner': 'you',
     'retries': 1,
+    'depends_on_past':False,
     'retry_delay': timedelta(minutes=5),
+    'email_on_failure':True,
+    'email':'amanbanna01rajput@gmail.com',
+    'email_on_retry':True
 }
 
 # Initialize the DAG
@@ -18,6 +22,7 @@ with DAG(
     dag_id='hello_airflow',
     default_args=default_args,
     start_date=datetime(2023, 3, 1),
+    description='Basic hello DAG',
     schedule_interval='@daily',
     catchup=False,
 ) as dag:
